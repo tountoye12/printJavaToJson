@@ -7,6 +7,8 @@ import org.example.domain.Employee;
 import org.example.helper.LocalDateTypeAdapter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -14,23 +16,17 @@ public class Main {
     public static void main(String[] args) {
 
 
-        List<Employee> employeeList1 = List.of(
-                new Employee(1, "Adama Diallo", 24, LocalDate.now()),
-                new Employee(2, "John Doe", 27, LocalDate.now()),
-                new Employee(2, "John Doe", 22, LocalDate.now()),
-                new Employee(3, "John Ly", 17, LocalDate.now())
-        );
+        List<Employee> employeeList1 = new ArrayList<>();
+        employeeList1.add(new Employee(1, "Adama Diallo", 24, java.time.LocalDate.now()));
+        employeeList1.add(new Employee(2, "John Doe", 27, java.time.LocalDate.now()));
+        employeeList1.add(new Employee(3, "Ebrima Doe", 22, java.time.LocalDate.now()));
+        employeeList1.add(new Employee(4, "Gabou Ly", 17, java.time.LocalDate.now()));
 
+        Collections.sort(employeeList1);
         printEmployee(employeeList1);
     }
 
     private static void printEmployee(List<Employee> employeeList) {
-
-        employeeList.stream()
-                .sorted(
-                        Comparator.comparing(Employee::getName)
-                                .thenComparing(Employee::getAge)
-                );
 
         Gson gson = new GsonBuilder().registerTypeAdapter(
                 LocalDate.class, new LocalDateTypeAdapter()
